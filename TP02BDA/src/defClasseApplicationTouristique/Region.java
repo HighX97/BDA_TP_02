@@ -1,11 +1,13 @@
 package defClasseApplicationTouristique;
 
+import java.util.List;
+
 public class Region 
 {
 	
 	String nom;
 	String description;
-	list<Departement> departements;
+	List<Departement> departements;
 	Plan plan;
 	Agglomeration prefecture;
 	Agglomeration chefLieu;
