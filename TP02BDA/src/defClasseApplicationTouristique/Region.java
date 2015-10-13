@@ -11,5 +11,7 @@ public class Region
 	Plan plan;
 	Agglomeration prefecture;
 	Agglomeration chefLieu;
-
+	
+	
+	
 }

@@ -15,7 +15,7 @@ public class main1
 	protected static void showAllStudents(ObjectContainer bd)
 	{
 		ObjectSet<Etudiant> oc=bd.query(new Predicate<Etudiant>() 
-				{
+		{
 			public boolean match(Etudiant candidat) 
 			{
 				return true;

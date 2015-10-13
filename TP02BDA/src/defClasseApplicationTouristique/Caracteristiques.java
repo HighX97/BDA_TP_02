@@ -1,0 +1,10 @@
+package defClasseApplicationTouristique;
+
+import java.util.List;
+
+public class Caracteristiques {
+	String nomCaracteristique;
+	String descriptionCaracteristique;
+	Agglomeration agglomeration_caracteristique;//Relationship Agglomeration agglomeration_caracteristique inverse caracteristiques_agglomeration;
+	TypeCarcateristique caracteristique_typeCaracteristique;//Relationship TypeCarcateristique caracteristique_typeCaracteristique inverse typeCaracteristique_caracteristique;
+}
