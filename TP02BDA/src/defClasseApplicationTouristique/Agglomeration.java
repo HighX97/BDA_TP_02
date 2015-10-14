@@ -1,6 +1,7 @@
 package defClasseApplicationTouristique;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public abstract class Agglomeration 
 {
@@ -11,21 +12,35 @@ public abstract class Agglomeration
 	int nbHabit;
 	String description;
 	Departement departement;
-	List<Caracteristiques> caracteristiques;
-	Region estPrefectureDe;
-	Region estChefLieuDe;
+	Set<Caracteristique> caracteristiques;
+	Region region;
 	
 	//Constructeurs
 	
 	Agglomeration()
 	{
-		System.out.println("Agglomération créée");
+		this.caracteristiques = new HashSet<Caracteristique>();
+		System.out.println("Agglomération enregistrée");
 	}
 	
 	Agglomeration(int cdPost,String nomAgg)
 	{
+		this.codePostal = cdPost;
 		this.nom = nomAgg;
-		System.out.println("L'agglomération "+this.nom+" de code postal "+this.codePostal+"à correctement été créée");
+		this.caracteristiques = new HashSet<Caracteristique>();
+		System.out.println("L'agglomération "+this.nom+" de code postal "+this.codePostal+"à correctement été enregistrée");
+	}
+	
+	Agglomeration(int cdPost,String nomAgg, int nbHabit, String description, Departement departement,Set<Caracteristique> caracteristiques,Region region)
+	{
+		this.codePostal = cdPost;
+		this.nom = nomAgg;
+		this.nbHabit = nbHabit;
+		this.description = description;
+		this.departement = departement;
+		this.caracteristiques = caracteristiques;
+		this.region = region;
+		System.out.println(this+" a été typeCarcateristiquecorrectement enregistré.");
 	}
 	
 	//Accesseurs
@@ -55,20 +70,16 @@ public abstract class Agglomeration
 		return this.departement;
 	}
 	
-	List<Caracteristiques> getCaracteristiques()
+	Set<Caracteristique> getCaracteristiques()
 	{
 		return this.caracteristiques;
 	}
 	
-	Region getRegPref()
+	Region getRegion()
 	{
-		return this.estPrefectureDe;
+		return this.region;
 	}
 	
-	Region getRegChefLieu()
-	{
-		return this.estChefLieuDe;
-	}
 	
 	
 	//Mutateurs
@@ -76,42 +87,78 @@ public abstract class Agglomeration
 	void setCodePostal(int cP)
 	{
 		this.codePostal = cP;
+		System.out.println("Agglomeration - codePostal MAJ");
 	}
 	
 	void setNom(String nomAgg)
 	{
 		this.nom = nomAgg;
+		System.out.println("Agglomeration - nom MAJ");
 	}
 	
 	void setNbHabit(int nbHab)
 	{
 		this.nbHabit = nbHab;
+		System.out.println("Agglomeration - nbHabit MAJ");
 	}
 	
 	void setDescription(String descrip)
 	{
 		this.description = descrip;
+		System.out.println("Agglomeration - description MAJ");
 	}
 	
 	void setDepartement(Departement dep)
 	{
 		this.departement=dep;
+		System.out.println("Agglomeration - departement MAJ");
 	}
 	
-	void setCaracteristiques(List<Caracteristiques> caracs)
+	void setCaracteristiques(Set<Caracteristique> caracs)
 	{
 		this.caracteristiques = caracs;
+		System.out.println("Agglomeration - caracteristiques MAJ");
 	}
 	
-	void setRegPref(Region reg)
+	void setRegion(Region reg)
 	{
-		this.estPrefectureDe = reg;
-	}
-	
-	void setRegChefLieu(Region reg)
-	{
-		this.estChefLieuDe = reg;
+		this.region = reg;
+		System.out.println("Agglomeration - region MAJ");
 	}
 	
 	//Methodes
+	
+		//Caracterisiques
+	int nbCaracteristiques()
+	{
+		return this.caracteristiques.size();
+	}
+	
+	boolean addCaracteristique(Caracteristique carac)
+	{
+		if(this.caracteristiques.add(carac))
+			{
+				System.out.println("La caractéristique "+carac.getNom()+" a été ajouté à l'agglomération "+this.getNom());
+				return true;
+			}
+		else
+			{
+				System.out.println("Le caractéristique "+carac.getNom()+" n'a pas été ajouté à l'agglomération "+this.getNom()+" car déja présent dans la collection des caractéristiques");
+				return false;
+			}
+	}
+	
+	boolean removeCaracteristique(Caracteristique carac)
+	{
+		if(this.caracteristiques.remove(carac))
+		{
+			System.out.println("La caractéristique"+carac.getNom()+" a été supprimé de l'agglomération "+this.getNom());
+			return true;
+		}
+		else
+		{
+			System.out.println("La caractéristique "+carac.getNom()+" n'a pas été trouvé dans l'agglomération "+this.getNom());
+			return false;
+		}
+	}
 }

@@ -18,12 +18,13 @@ public class Region
 	Set<Agglomeration> prefectures;
 	Agglomeration chefLieu;
 	
-	//Constructeur
+	//Constructeurs
+	
 	public Region ()
 	{
 		this.departements = new HashSet<Departement>();
 		this.prefectures = new HashSet<Agglomeration>();
-		System.out.println("Région créée.");
+		System.out.println("Région enregistrée.");
 	}
 	
 	public Region (String nom, String Description)
@@ -32,7 +33,7 @@ public class Region
 		this.description = Description;
 		this.departements = new HashSet<Departement>();
 		this.prefectures = new HashSet<Agglomeration>();
-		System.out.println("La région "+this.nom+" qui est "+this.description+" à correctement été créée.");
+		System.out.println("La région "+this.nom+" qui est "+this.description+" a correctement été enregistrée.");
 	}
 	
 	public Region (String nom, String Description, HashSet<Departement> departements, Plan plan, HashSet<Agglomeration> prefecture, Agglomeration chefLieu)
@@ -43,10 +44,11 @@ public class Region
 		this.plan = plan;
 		this.prefectures = prefecture;
 		this.chefLieu = chefLieu;
-		System.out.println(this+" créée.");
+		System.out.println(this+" a été correctement enregistrée.");
 	}
 	
 	//Accesseurs
+	
 	String getNom()
 	{
 		return this.nom;
@@ -78,6 +80,7 @@ public class Region
 	}
 	
 	//Mutateurs
+	
 	void setNom(String nomReg)
 	{
 		this.nom=nomReg;
@@ -182,6 +185,32 @@ public class Region
 			return false;
 		}
 	}
+	
+			//Divers
+	
+	float getSurfaceTotal()
+	{
+		float surfaceTotal=0;
+		Iterator i = departements.iterator();
+		while(i.hasNext())
+		{
+			surfaceTotal += ((Departement)i.next()).getSurface();
+		}
+		return surfaceTotal;
+	}
+	
+	int getPopulationRegion()
+	{
+		int populationTotal=0;
+		Iterator i = departements.iterator();
+		while(i.hasNext())
+		{
+			populationTotal += ((Departement)i.next()).getPopulationDept();
+		}
+		return populationTotal;
+	}
+	
+			//Reimplémentations
 	
 	public String toString()
 	{
