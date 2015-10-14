@@ -263,8 +263,8 @@ public abstract class Agglomeration
 	  );
 	  for(Agglomeration ag:oc){
 	      for (Hotel hot:hotels ){
-	    	  if( hot.nbEtoiles = etoiles ){
-	    		  System.out.println(" nom: " + hot.getNom());
+	    	  if( (int) hot.nbEtoiles == etoiles ){
+	    		  System.out.println(" nom: " + hot.nom);
 	    	  }
 			  
 		  }
