@@ -8,41 +8,80 @@ import com.db4o.query.Predicate;
 
 public class Region 
 {
-	
+	//Attributs
 	String nom;
-	String Description;
+	String description;
 	List<Departement> departements;
 	Plan plan;
-	Agglomeration prefecture;
+	List<Agglomeration> prefectures;
 	Agglomeration chefLieu;
 	
+	//Constructeur
 	public Region ()
 	{
-		System.out.println(this+" cree.");
+		System.out.println("Région créée.");
 	}
 	
 	public Region (String nom, String Description)
 	{
 		this.nom = nom;
-		this.Description = Description;
-		System.out.println(this+" cree.");
+		this.description = Description;
+		System.out.println("La région "+this.nom+" qui est "+this.description+" à correctement été créée.");
 	}
 	
-	public Region (String nom, String Description, List<Departement> departements, Plan plan, Agglomeration prefecture, Agglomeration chefLieu)
+	public Region (String nom, String Description, List<Departement> departements, Plan plan, List<Agglomeration> prefecture, Agglomeration chefLieu)
 	{
 		this.nom = nom;
-		this.Description = Description;
+		this.description = Description;
 		this.departements = departements;
 		this.plan = plan;
-		this.prefecture = prefecture;
+		this.prefectures = prefecture;
 		this.chefLieu = chefLieu;
-		System.out.println(this+" cree.");
+		System.out.println(this+" créée.");
 	}
 	
-	
+	//Accesseurs
 	public String getName()
 	{
 		return nom;
+	}
+	
+	//Mutateurs
+	
+	
+	//Methodes
+	
+	public String toString()
+	{
+		String toStringRegion="";
+		//nom
+		toStringRegion += "La région "+this.nom;
+		//description
+		toStringRegion += " qui est "+this.description;
+		//départements
+		toStringRegion += " composé des départements:\n";
+		int i;
+		for(i=0;i<this.departements.size();i++)
+		{
+			toStringRegion += "-"+this.departements.get(i).getName()+"\n";
+		}
+		//prefecture
+		if (this.prefectures.size()>1)
+		{
+			toStringRegion += "dont les préfectures sont:\n";
+		}
+		else
+		{
+			toStringRegion += "dont la préfecture est:\n";
+		}
+		int j;
+		for(j=0;j<this.prefectures.size();j++)
+		{
+			toStringRegion += "-"+this.prefectures.get(j).getNom()+"\n";
+		}
+		//chefLieu
+		toStringRegion += "et dont la chef lieu est "+this.chefLieu.getNom();
+		return toStringRegion;
 	}
 	
 	protected static void showDepartementFromRegion(ObjectContainer bd, String idRegion)

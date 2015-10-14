@@ -4,7 +4,8 @@ import java.util.List;
 import com.db4o.*;
 import com.db4o.query.Predicate;
 
-public class Departement {
+public class Departement 
+{
 	int idDept;
 	String nom;
 	float surface;
