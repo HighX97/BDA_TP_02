@@ -1,6 +1,7 @@
 package defClasseApplicationTouristique;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 public class TypeCarcateristique 
@@ -50,5 +51,20 @@ public class TypeCarcateristique
 	}
 	
 	//Méthodes
+	
+	public String toString()
+	{
+		String toStringTypeCarac="";
+		//nom
+		toStringTypeCarac += "Le type "+this.nom;
+		//caractéristiques
+		toStringTypeCarac += " type les caractéristiques suivantes:\n";
+		Iterator i = caracteristiques.iterator();
+		while(i.hasNext())
+		{
+			toStringTypeCarac += "-"+((Caracteristique)i.next()).getNom()+"\n";
+		}
+		return toStringTypeCarac;
+	}
 	
 }

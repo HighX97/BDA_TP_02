@@ -1,19 +1,20 @@
 package defClasseApplicationTouristique;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 public abstract class Agglomeration 
 {
 	//Attributs
 	
-	int codePostal;
-	String nom;
-	int nbHabit;
-	String description;
-	Departement departement;
-	Set<Caracteristique> caracteristiques;
-	Region region;
+	protected int codePostal;
+	protected String nom;
+	protected int nbHabit;
+	protected String description;
+	protected Departement departement;
+	protected Set<Caracteristique> caracteristiques;
+	protected Region region;
 	
 	//Constructeurs
 	
@@ -40,7 +41,7 @@ public abstract class Agglomeration
 		this.departement = departement;
 		this.caracteristiques = caracteristiques;
 		this.region = region;
-		System.out.println(this+" a été typeCarcateristiquecorrectement enregistré.");
+		System.out.println(this+" a été correctement enregistré.");
 	}
 	
 	//Accesseurs
@@ -160,5 +161,62 @@ public abstract class Agglomeration
 			System.out.println("La caractéristique "+carac.getNom()+" n'a pas été trouvé dans l'agglomération "+this.getNom());
 			return false;
 		}
+	}
+	
+		//Prefecture & ChefLieu
+	
+	boolean estPrefecture()
+	{
+		Iterator j = this.getRegion().getPrefectures().iterator();
+		boolean estPrefecture=false;
+		while(j.hasNext() && !estPrefecture)
+		{
+			estPrefecture=((Agglomeration) j.next()).getNom().equalsIgnoreCase(this.nom);
+		}
+		return estPrefecture;
+	}
+	
+	boolean estChefLieu()
+	{
+		return (this.getRegion().getChefLieu().equals(this));
+	}
+	
+		//Réimplémentation
+	
+	public String toString()
+	{
+		String toStringAgg="";
+		//nom
+		toStringAgg += "L'agglomération "+this.nom;
+		//codePostal
+		toStringAgg += " de code postal "+this.codePostal;
+		//departement
+		toStringAgg += " du departement "+this.departement.getNom();
+		//chefLieu &&prefecture
+		if (estChefLieu() && estPrefecture() )
+		{
+			toStringAgg += " chef lieu et préfecture de la région "+this.region.getNom();
+		}
+		else if (estChefLieu())
+		{
+			toStringAgg += " chef lieu de la région "+this.region.getNom();
+		}
+		else if (estPrefecture())
+		{
+			toStringAgg += " préfecture de la région "+this.region.getNom();
+		}
+		//nbHabitant
+		toStringAgg += ".\n Elle possède"+this.nbHabit+" habitants";
+		//descrtiption
+		toStringAgg += "et se décrit de la façon suivante : \n"+this.description;
+		//caracteristiques
+		toStringAgg += ".\nElle possède les caractéristiques suivantes:\n";
+		Iterator i = caracteristiques.iterator();
+		while(i.hasNext())
+		{
+			Caracteristique carac =((Caracteristique)i.next());
+			toStringAgg += "-("+carac.getTypeCarcateristique().getNom()+") "+carac.getNom()+"\n";
+		}
+		return toStringAgg;
 	}
 }

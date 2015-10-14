@@ -151,7 +151,7 @@ public class Departement
 		return populationTotal;
 	}
 	
-			//Reimplémentations
+			//Réimplémentations
 	
 	public String toString()
 	{
