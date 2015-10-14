@@ -15,7 +15,7 @@ public class Departement
 	private String nom;
 	private float surface;
 	private Region region;//Relationship Region region inverse departement;
-	private Set<Agglomeration> agglomerations;	//Relationship set<Agglomeration> agglomerations inverse departement;
+	Set<Agglomeration> agglomerations;	//Relationship set<Agglomeration> agglomerations inverse departement;
 	
 	//Constructeurs
 	
@@ -172,6 +172,28 @@ public class Departement
 			toStringDept += "-"+((Agglomeration)i.next()).getNom()+"\n";
 		}
 		return toStringDept;
+	}
+	
+	protected static void showAgglomerationsInfoFromDeparment(ObjectContainer bd, String depId)
+	{
+	  
+	  ObjectSet<Departement> oc=bd.query
+		(
+			new Predicate<Departement>(){
+				public boolean match(Departement d)
+				{
+					return true;
+				}
+			}
+		);
+	  for(Departement d:oc){
+	    if (d.getNom() == depId)
+	    {
+	      for (Agglomeration ag:d.agglomerations ){
+    		  System.out.println("codePostal: " + ag.codePostal + " nom: " + ag.nom + " descritpion: " + ag.description + " nbHabit: " + ag.description + " surface: " + d.surface);
+    	  }
+        }
+	  }
 	}
 	
 //		/*

@@ -4,6 +4,10 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+import com.db4o.ObjectContainer;
+import com.db4o.ObjectSet;
+import com.db4o.query.Predicate;
+
 public abstract class Agglomeration 
 {
 	//Attributs
@@ -14,6 +18,7 @@ public abstract class Agglomeration
 	protected String description;
 	protected Departement departement;
 	protected Set<Caracteristique> caracteristiques;
+	protected Set<Hotel> hotels;//Relationship set<Hotel> hotels inverse ville_hotel;
 	protected Region region;
 	
 	//Constructeurs
@@ -218,5 +223,51 @@ public abstract class Agglomeration
 			toStringAgg += "-("+carac.getTypeCarcateristique().getNom()+") "+carac.getNom()+"\n";
 		}
 		return toStringAgg;
+	}
+	
+	protected void getAgglomerationsWithMonuments(ObjectContainer bd)
+	{
+	  
+	  ObjectSet<Agglomeration> oc=bd.query
+	  (
+	    new Predicate<Agglomeration>()
+	    {
+	      public boolean match(Agglomeration ag)
+	      {
+	        return true;
+	      }
+	    }
+	  );
+	  for(Agglomeration ag:oc){
+	      for (Caracteristique car:caracteristiques ){
+	    	  if( car.getType() = "monument" ){
+	    		  System.out.println(" nom: " + ag.getNom());
+	    	  }
+			  
+		  }
+      }
+	}
+	
+	protected void getAgglomerationsHotelsByStars(ObjectContainer bd, int etoiles)
+	{
+	  
+	  ObjectSet<Agglomeration> oc=bd.query
+	  (
+	    new Predicate<Agglomeration>()
+	    {
+	      public boolean match(Agglomeration ag)
+	      {
+	        return true;
+	      }
+	    }
+	  );
+	  for(Agglomeration ag:oc){
+	      for (Hotel hot:hotels ){
+	    	  if( hot.nbEtoiles = etoiles ){
+	    		  System.out.println(" nom: " + hot.getNom());
+	    	  }
+			  
+		  }
+      }
 	}
 }

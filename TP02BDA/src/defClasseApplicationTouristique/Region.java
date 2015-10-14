@@ -251,7 +251,7 @@ public class Region
 	  (
 	    new Predicate<Region>()
 	    {
-	      public boolean match(Region candidat)
+	      public boolean match(Region r)
 	      {
 	        return true;
 	      }
@@ -263,6 +263,33 @@ public class Region
 	      for (Departement d:r.departements)	
 	      {
 	        System.out.println(d);
+	      }
+	    }
+	  }
+	}
+	
+	protected static void showAgglomerationsFromRegion(ObjectContainer bd, String idRegion)
+	{
+	  ObjectSet<Region> oc=bd.query
+	  (
+	    new Predicate<Region>()
+	    {
+	      public boolean match(Region r)
+	      {
+	        return true;
+	      }
+	    }
+	  );
+	  for(Region r:oc){
+	    if (r.getNom() == idRegion)
+	    {
+	      for (Departement d:r.departements)	
+	      {
+	    	  for(Agglomeration a:d.agglomerations){
+	    		  
+	    		  System.out.println(a.getNom());
+	    	  }
+	    	  
 	      }
 	    }
 	  }
